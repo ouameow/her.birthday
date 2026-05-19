@@ -1,0 +1,635 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=yes">
+    <title>For You · Happy Birthday ✨</title>
+    <style>
+
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            background: linear-gradient(145deg, #ffb6c1 0%, #ff9eb5 100%);
+            min-height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            font-family: 'Segoe UI', 'Quicksand', system-ui, -apple-system, 'Poppins', sans-serif;
+            padding: 1.5rem;
+        }
+
+        .slides-container {
+            position: relative;
+            width: 100%;
+            max-width: 600px;
+            min-height: 580px;
+            background: rgba(255, 255, 255, 0.92);
+            backdrop-filter: blur(2px);
+            border-radius: 2.5rem;
+            box-shadow: 0 25px 45px rgba(0, 0, 0, 0.2), 0 0 0 1px rgba(255,255,240,0.6);
+            overflow: hidden;
+            transition: all 0.2s ease;
+        }
+
+        .slide {
+            display: none;
+            opacity: 0;
+            transform: translateX(20px);
+            transition: opacity 0.4s ease, transform 0.4s ease;
+            padding: 2rem 1.8rem 2rem 1.8rem;
+            flex-direction: column;
+            align-items: center;
+            text-align: center;
+        }
+
+        .slide.active {
+            display: flex;
+            opacity: 1;
+            transform: translateX(0);
+            animation: gentleAppear 0.5s cubic-bezier(0.2, 0.9, 0.4, 1.1);
+        }
+
+        @keyframes gentleAppear {
+            0% {
+                opacity: 0;
+                transform: translateY(12px);
+            }
+            100% {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        h1 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            background: linear-gradient(135deg, #d43f6b, #b2225c);
+            background-clip: text;
+            -webkit-background-clip: text;
+            color: transparent;
+            margin-bottom: 0.5rem;
+            letter-spacing: -0.3px;
+        }
+
+        h2 {
+            font-size: 1.9rem;
+            font-weight: 600;
+            color: #b13e62;
+            margin-bottom: 0.75rem;
+        }
+
+        h3 {
+            font-size: 1.5rem;
+            font-weight: 500;
+            color: #c44d6f;
+            margin-bottom: 1rem;
+        }
+
+        .message {
+            font-size: 1.15rem;
+            line-height: 1.5;
+            color: #4a2e38;
+            background: #fff0f3;
+            padding: 1rem 1.2rem;
+            border-radius: 2rem;
+            margin: 1rem 0;
+            width: 100%;
+            box-shadow: inset 0 1px 2px #ffcdd9, 0 4px 8px rgba(0,0,0,0.02);
+        }
+
+        .btn {
+            background: #ff8aa8;
+            border: none;
+            padding: 0.85rem 2rem;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+            border-radius: 60px;
+            cursor: pointer;
+            margin-top: 1.5rem;
+            width: fit-content;
+            transition: all 0.25s;
+            box-shadow: 0 6px 0 #a13e58;
+            font-family: inherit;
+            position: relative;
+        }
+
+        .btn:active {
+            transform: translateY(3px);
+            box-shadow: 0 3px 0 #a13e58;
+        }
+
+        .btn-secondary {
+            background: #e98cad;
+            box-shadow: 0 6px 0 #9f3e58;
+        }
+
+        .btn-group {
+            display: flex;
+            gap: 1.2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            margin-top: 1rem;
+            position: relative;
+            min-height: 100px;
+        }
+
+        .choice-btn {
+            background: #ffb6c9;
+            box-shadow: 0 5px 0 #9f4a64;
+            padding: 0.7rem 1.7rem;
+            font-size: 1rem;
+            transition: all 0.2s ease;
+        }
+
+        .moving-btn {
+            transition: all 0.15s ease-out;
+            position: relative;
+        }
+
+        .heart-icon {
+            font-size: 3.2rem;
+            margin: 0.5rem 0;
+            animation: pulse 1.5s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 0.7;}
+            100% { transform: scale(1.1); opacity: 1;}
+        }
+
+        .photo-placeholder {
+            background: #ffe2e9;
+            width: 100px;
+            height: 100px;
+            border-radius: 100%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            margin: 0.8rem auto;
+            box-shadow: 0 8px 18px rgba(0,0,0,0.1);
+        }
+
+        .small-note {
+            font-size: 0.85rem;
+            color: #bd7b8f;
+            margin-top: 1.5rem;
+        }
+
+        .response-message {
+            background: #ffecf0;
+            border-radius: 2rem;
+            padding: 1rem;
+            margin: 1rem 0;
+            font-weight: 500;
+            color: #ad4b68;
+        }
+
+        footer {
+            font-size: 0.7rem;
+            color: #cc8da1;
+            margin-top: 1rem;
+            text-align: center;
+        }
+
+        .teaser-message {
+            font-size: 0.9rem;
+            color: #c45a7a;
+            margin-top: 0.8rem;
+            font-style: italic;
+            animation: subtleGlow 1s infinite;
+        }
+
+        @keyframes subtleGlow {
+            0%, 100% { opacity: 0.6; }
+            50% { opacity: 1; }
+        }
+
+        @media (max-width: 480px) {
+            .slide { padding: 1.5rem 1.2rem; }
+            h1 { font-size: 2rem; }
+            h2 { font-size: 1.5rem; }
+            .btn { font-size: 1rem; padding: 0.7rem 1.5rem; }
+            .btn-group { min-height: 120px; }
+        }
+
+    </style>
+</head>
+<body>
+
+<div class="slides-container" id="appSlides">
+    <!-- PAGE 1: Birthday greeting + Next button -->
+    <div class="slide active" id="slide1">
+        <div class="heart-icon">🎂💖</div>
+        <h1>Happy Birthday ✨</h1>
+        <div class="photo-placeholder">🌸🎈</div>
+        <div class="message">
+            Today is a special day, because it’s the day you were born, Sara. 🌷<br>
+
+I hope your day is full of love, soft smiles, and little moments that make your heart happy. You deserve all the sweetness and joy in the world.
+<br>
+Happy birthday, Sara 💖
+<br>
+           
+        </div>
+        <button class="btn" id="nextBtn1">✨ Next ✨</button>
+
+    </div>
+
+    <!-- PAGE 2: Memories & emotions -->
+    <div class="slide" id="slide2">
+        <div class="heart-icon">📸💭</div>
+        <h2>A thought for you...</h2>
+        <div class="message">
+            Every moment spent with you remains engraved in my heart. Your laugh, your sweetness, that unique connection we had.<br>
+            
+        </div>
+        <button class="btn" id="nextBtn2">💌 Next page 💌</button>
+        
+    </div>
+
+    <!-- PAGE 3: What you mean to me -->
+    <div class="slide" id="slide3">
+        <div class="heart-icon">🌟🌙</div>
+        <h3>You are extraordinary</h3>
+        <div class="message">
+            Your light, your strength, and the way you love have changed me. Even if time passes, some things never fade.<br>
+            I'm genuinely happy to see you grow and shine.
+        </div>
+        <button class="btn" id="nextBtn3">❤️ One more step ❤️</button>
+    </div>
+
+    <!-- PAGE 4: The real question - can we be together again (with moving NO button) -->
+    <div class="slide" id="slide4">
+        <div class="heart-icon">💌💫</div>
+        <h2>A question from the heart...</h2>
+        <div class="message" style="background:#fff5f7;">
+           I still love you Sara, just like the first day. In fact, 
+           our separation only increased my love for you. Let's just make what happened a story we tell each other and laugh about.<br>
+            <strong style="color:#bc5a7a;">I want to be honest: I still believe in us.</strong>
+        </div>
+        <div class="btn-group" id="buttonGroup">
+            <button class="btn choice-btn" id="answerYes">💗 Yes, I'd love to 💗</button>
+            <button class="btn choice-btn btn-secondary moving-btn" id="answerNo">🌿 I'd rather stay friends 🌿</button>
+        </div>
+        <div id="responseArea" style="margin-top: 1rem; width:100%;"></div>
+        <div class="teaser-message" id="teaserMessage">✨ (psst... the other button might be a little shy) ✨</div>
+        <div class="small-note">whatever you choose, your happiness matters most.</div>
+    </div>
+
+    <!-- PAGE 5: Positive answer (Yes) -->
+    <div class="slide" id="slide5">
+        <div class="heart-icon">💞✨</div>
+        <h2>A fresh start?</h2>
+        <div class="message" style="background:#ffe5ed;">
+            Thank you... truly. 🌷<br>
+            I'm so happy that you're willing to give us another chance. Let's promise to listen to each other even more, to laugh together, and to treasure every moment.<br><br>
+            I want to build something strong with you, step by step. Happy birthday, my love. 🎂❤️
+        </div>
+        <button class="btn" id="resetBtnPositive">✨ Start over ✨</button>
+       
+    </div>
+
+    <!-- PAGE 6: Friendship answer (only reachable if someone manages to click moving button - but it's possible after many tries!) -->
+    <div class="slide" id="slide6">
+        <div class="heart-icon">🌸🤍🌿</div>
+        <h2>With sincerity</h2>
+        <div class="message">
+            I understand your answer, and I respect it with all my heart. What matters to me is that you're happy and at peace.<br>
+            I'll always be here for you, to support you, to celebrate your victories. Nothing can erase the beautiful moments we shared.<br><br>
+            Happy birthday again, and thank you for listening to my message. 🌷
+        </div>
+        <button class="btn" id="resetBtnNeutral">💫 Back to beginning 💫</button>
+        <footer>A beautiful friendship is still precious ✨</footer>
+    </div>
+</div>
+
+<script>
+    // ---------- Slide navigation management ----------
+    const slides = document.querySelectorAll('.slide');
+    let currentIndex = 0;
+    let lockTransition = false;
+
+    function showSlide(index) {
+        slides.forEach(slide => slide.classList.remove('active'));
+        if (index >= 0 && index < slides.length) {
+            slides[index].classList.add('active');
+            currentIndex = index;
+        } else {
+            slides[0].classList.add('active');
+            currentIndex = 0;
+        }
+    }
+
+    function clearResponseArea() {
+        const responseArea = document.getElementById('responseArea');
+        if (responseArea) responseArea.innerHTML = '';
+    }
+
+    // Helper to safely rebind buttons with transition lock
+    function safeRebind(btn, callback) {
+        if (!btn) return null;
+        const newBtn = btn.cloneNode(true);
+        btn.parentNode.replaceChild(newBtn, btn);
+        newBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            if (lockTransition) return;
+            lockTransition = true;
+            callback();
+            setTimeout(() => { lockTransition = false; }, 500);
+        });
+        return newBtn;
+    }
+
+    // Navigation for first three pages
+    const next1 = document.getElementById('nextBtn1');
+    const next2 = document.getElementById('nextBtn2');
+    const next3 = document.getElementById('nextBtn3');
+
+    if (next1) safeRebind(next1, () => showSlide(1));
+    if (next2) safeRebind(next2, () => showSlide(2));
+    if (next3) safeRebind(next3, () => showSlide(3));
+
+    // Confetti effect for happy moments
+    function simpleConfetti() {
+        for (let i = 0; i < 42; i++) {
+            const conf = document.createElement('div');
+            const icons = ['🎉', '💗', '🌸', '✨', '💖', '🎂', '🥰', '💫', '🌷'];
+            conf.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+            conf.style.position = 'fixed';
+            conf.style.fontSize = '1.5rem';
+            conf.style.left = Math.random() * window.innerWidth + 'px';
+            conf.style.top = '-30px';
+            conf.style.pointerEvents = 'none';
+            conf.style.zIndex = '9999';
+            conf.style.opacity = '0.9';
+            conf.style.transition = 'all 1.5s ease-out';
+            document.body.appendChild(conf);
+            const endX = (Math.random() - 0.5) * 220;
+            const endY = window.innerHeight - 60 + Math.random() * 200;
+            setTimeout(() => {
+                conf.style.transform = `translate(${endX}px, ${endY}px) rotate(${Math.random() * 360}deg)`;
+                conf.style.opacity = '0';
+            }, 10);
+            setTimeout(() => conf.remove(), 1500);
+        }
+    }
+
+    // ---------- MOVING BUTTON LOGIC ----------
+    // The "I'd rather stay friends" button moves away when hovered or touched
+    const movingButton = document.getElementById('answerNo');
+    const buttonGroup = document.getElementById('buttonGroup');
+    let moveAttempts = 0;
+    
+    function getRandomPosition(buttonElement, containerElement) {
+        if (!containerElement || !buttonElement) return { x: 0, y: 0 };
+        
+        const containerRect = containerElement.getBoundingClientRect();
+        const buttonRect = buttonElement.getBoundingClientRect();
+        const slideRect = document.getElementById('slide4').getBoundingClientRect();
+        
+        // Calculate relative positions within the button group
+        const maxX = Math.max(50, containerRect.width - buttonRect.width - 10);
+        const maxY = Math.max(30, containerRect.height - buttonRect.height - 10);
+        
+        // Get random positions, but try to keep it within visible area
+        let randomX = Math.random() * maxX;
+        let randomY = Math.random() * maxY;
+        
+        // Make sure it doesn't overlap too much with the Yes button
+        const yesButton = document.getElementById('answerYes');
+        if (yesButton) {
+            const yesRect = yesButton.getBoundingClientRect();
+            const relativeYesX = yesRect.left - containerRect.left;
+            const relativeYesY = yesRect.top - containerRect.top;
+            
+            // If too close to Yes button, reposition
+            const distanceX = Math.abs(randomX - relativeYesX);
+            const distanceY = Math.abs(randomY - relativeYesY);
+            if (distanceX < 80 && distanceY < 50) {
+                randomX = (randomX + 100) % maxX;
+                randomY = (randomY + 60) % maxY;
+            }
+        }
+        
+        return { x: randomX, y: randomY };
+    }
+    
+    function moveButton(){
+
+    moveAttempts++;
+
+    const teaser = document.getElementById('teaserMessage');
+
+    const messages = [
+        "✨ (the button seems to have other plans...) ✨",
+        "💫 (it really wants you to click the pink one!) 💫",
+        "🎈 (maybe just try the 'Yes' button?) 🎈",
+        "💗 (it's moving away again... how persistent!) 💗",
+        "🌸 (okay, this button is clearly shy!) 🌸"
+    ];
+
+    teaser.innerHTML =
+        messages[Math.min(moveAttempts-1,messages.length-1)];
+
+    const container = document.querySelector('.slides-container');
+
+    const containerWidth = container.clientWidth;
+    const containerHeight = container.clientHeight;
+
+    const buttonWidth = movingButton.offsetWidth;
+    const buttonHeight = movingButton.offsetHeight;
+
+    // SAFE AREA
+    const padding = 20;
+
+    const maxX = containerWidth - buttonWidth - padding;
+    const maxY = containerHeight - buttonHeight - padding;
+
+    const randomX = Math.random() * (maxX - padding) + padding;
+    const randomY = Math.random() * (maxY - padding) + padding;
+
+    movingButton.style.position = 'absolute';
+
+    movingButton.style.left = `${randomX}px`;
+    movingButton.style.top = `${randomY}px`;
+
+    movingButton.style.transition = 'all 0.2s ease';
+
+    movingButton.style.zIndex = '9999';
+}
+    
+    // Move button on hover (desktop) and on touch start (mobile)
+    if (movingButton) {
+        // Initially set relative positioning context
+        if (buttonGroup) {
+            buttonGroup.style.position = 'relative';
+            buttonGroup.style.minHeight = '100px';
+        }
+        
+        movingButton.style.position = 'relative';
+        movingButton.style.transition = 'left 0.2s ease, top 0.2s ease, transform 0.1s ease';
+        
+        // Mouse enter event (desktop)
+        movingButton.addEventListener('mouseenter', function(e) {
+            e.preventDefault();
+            moveButton();
+        });
+        
+        // Touch start event (mobile) - moves before they can tap
+        movingButton.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            moveButton();
+            // Also trigger a slight haptic-like feedback visually
+            this.style.transform = 'scale(0.95)';
+            setTimeout(() => {
+                if (movingButton) movingButton.style.transform = 'scale(1)';
+            }, 150);
+        });
+        
+        // Also move on click attempt (if they somehow click fast)
+        movingButton.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            moveButton();
+            
+            // Show a playful message
+            const responseDiv = document.getElementById('responseArea');
+            if (responseDiv) {
+                responseDiv.innerHTML = '<div class="response-message">😄 Nice try! The button is feeling playful... maybe try the other one? 😄</div>';
+                setTimeout(() => {
+                    if (responseDiv && document.getElementById('slide4').classList.contains('active')) {
+                        responseDiv.innerHTML = '';
+                    }
+                }, 1500);
+            }
+        });
+    }
+    
+    // YES button - leads to slide5 (positive page) - this one is fixed and works normally
+    const yesButton = document.getElementById('answerYes');
+    if (yesButton) {
+        safeRebind(yesButton, () => {
+            clearResponseArea();
+            const respDiv = document.getElementById('responseArea');
+            if (respDiv) {
+                respDiv.innerHTML = '<div class="response-message">💖 Your "yes" makes me so happy... taking you there 💖</div>';
+            }
+            simpleConfetti();
+            setTimeout(() => {
+                showSlide(4); // slide5 (index 4)
+                clearResponseArea();
+                // Reset moving button position for next time (if they start over)
+                if (movingButton) {
+                    movingButton.style.position = 'relative';
+                    movingButton.style.left = 'auto';
+                    movingButton.style.top = 'auto';
+                    movingButton.style.marginTop = '1.5rem';
+                    moveAttempts = 0;
+                    const teaser = document.getElementById('teaserMessage');
+                    if (teaser) teaser.innerHTML = '✨ (psst... the other button might be a little shy) ✨';
+                }
+            }, 800);
+        });
+    }
+    
+    // Reset buttons from final pages
+    const resetPositive = document.getElementById('resetBtnPositive');
+    const resetNeutral = document.getElementById('resetBtnNeutral');
+    
+    function resetAllToBeginning() {
+        clearResponseArea();
+        showSlide(0);
+        // Reset moving button position for next time
+        setTimeout(() => {
+            if (movingButton && buttonGroup) {
+                movingButton.style.position = 'relative';
+                movingButton.style.left = 'auto';
+                movingButton.style.top = 'auto';
+                movingButton.style.marginTop = '1.5rem';
+                moveAttempts = 0;
+                const teaser = document.getElementById('teaserMessage');
+                if (teaser) teaser.innerHTML = '✨ (psst... the other button might be a little shy) ✨';
+            }
+        }, 100);
+    }
+    
+    if (resetPositive) {
+        safeRebind(resetPositive, () => {
+            resetAllToBeginning();
+        });
+    }
+    
+    if (resetNeutral) {
+        safeRebind(resetNeutral, () => {
+            resetAllToBeginning();
+        });
+    }
+    
+    // Initialize: ensure first slide is active and button group has proper styling
+    window.addEventListener('load', () => {
+        clearResponseArea();
+        showSlide(0);
+        
+        // Setup button group relative positioning
+        if (buttonGroup) {
+            buttonGroup.style.position = 'relative';
+            buttonGroup.style.minHeight = '100px';
+        }
+        
+        if (movingButton) {
+            movingButton.style.position = 'relative';
+            movingButton.style.transition = 'left 0.2s ease, top 0.2s ease, transform 0.1s ease';
+        }
+        
+        // Add a little welcome message in console
+        console.log("💌 A special birthday message — with a playful twist! 💌");
+    });
+    
+    // Extra: make sure when returning to slide4, the moving button is reset
+    const originalShowSlide = showSlide;
+    window.showSlide = function(index) {
+        if (index === 3) { // slide4 index
+            setTimeout(() => {
+                if (movingButton && buttonGroup) {
+                    movingButton.style.position = 'relative';
+                    movingButton.style.left = 'auto';
+                    movingButton.style.top = 'auto';
+                    movingButton.style.marginTop = '1.5rem';
+                    moveAttempts = 0;
+                    const teaser = document.getElementById('teaserMessage');
+                    if (teaser) teaser.innerHTML = '✨ (psst... the other button might be a little shy) ✨';
+                    clearResponseArea();
+                }
+            }, 50);
+        }
+        originalShowSlide(index);
+    };
+    
+    // Override safely
+    showSlide = function(index) {
+        if (index === 3) {
+            setTimeout(() => {
+                if (movingButton && buttonGroup) {
+                    movingButton.style.position = 'relative';
+                    movingButton.style.left = 'auto';
+                    movingButton.style.top = 'auto';
+                    movingButton.style.marginTop = '1.5rem';
+                    moveAttempts = 0;
+                    const teaser = document.getElementById('teaserMessage');
+                    if (teaser) teaser.innerHTML = '✨ (psst... the other button might be a little shy) ✨';
+                    clearResponseArea();
+                }
+            }, 50);
+        }
+        originalShowSlide(index);
+    };
+</script>
+</body>
+</html>
